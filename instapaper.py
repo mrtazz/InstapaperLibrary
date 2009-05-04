@@ -16,8 +16,14 @@ class Instapaper:
         self.addurl = "https://www.instapaper.com/api/add"
         
     def addItem(self, url, title=""):
-        ''' Method to add a new item to a instapaper account'''
+        ''' Method to add a new item to a instapaper account
+            Returns 0 on success and -1 if something went wrong
+        '''
         parameters = {'username' : self.user,'password' : self.password,'url' : url, 'title' : title}
         headerdata = urllib.urlencode(parameters)
         request = urllib2.Request(self.addurl, headerdata)
-        response = urllib2.urlopen(request)
+        response = urllib2.urlopen(request).read()
+        if (int(response) == 201):
+            return 0
+        else:
+            return -1
