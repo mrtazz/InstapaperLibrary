@@ -21,9 +21,12 @@ class Instapaper:
         '''
         parameters = {'username' : self.user,'password' : self.password,'url' : url, 'title' : title}
         headerdata = urllib.urlencode(parameters)
-        request = urllib2.Request(self.addurl, headerdata)
-        response = urllib2.urlopen(request).read()
-        if (int(response) == 201):
-            return 0
-        else:
+        try:
+            request = urllib2.Request(self.addurl, headerdata)
+            response = urllib2.urlopen(request).read()
+            if (int(response) == 201):
+                return 0
+            else:
+                return -1
+        except IOError, e:
             return -1
