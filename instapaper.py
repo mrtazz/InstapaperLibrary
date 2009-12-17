@@ -8,13 +8,13 @@ import urllib2
 
 class Instapaper:
     ''' This class provides the structure for the connection object '''
-    
+
     def __init__(self, user, password):
         self.user = user
         self.password = password
         self.authurl = "https://www.instapaper.com/api/authenticate"
         self.addurl = "https://www.instapaper.com/api/add"
-        
+
     def addItem(self, url, title=""):
         ''' Method to add a new item to a instapaper account
             Returns 0 on success and -1 if something went wrong
