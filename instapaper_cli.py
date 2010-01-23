@@ -29,7 +29,7 @@ def main():
             title = options.title
         pw = getpass()
         inst = Instapaper(options.user,pw)
-        result = inst.addItem(args[0],title)
+        result = inst.add_item(args[0],title)
         if (result == -1):
             print "Uh-Oh, something went wrong."
 
