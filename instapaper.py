@@ -32,5 +32,13 @@ class Instapaper:
                 return 0
             else:
                 return -1
-        except IOError, e:
+        except IOError:
             return -1
+
+    def set_username(self, user):
+        """ set username"""
+        self.user = user
+
+    def set_password(self, password):
+        """ set password """
+        self.password = password
