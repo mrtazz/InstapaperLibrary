@@ -14,6 +14,19 @@ class Instapaper:
         self.authurl = "https://www.instapaper.com/api/authenticate"
         self.addurl = "https://www.instapaper.com/api/add"
 
+        self.add_status_codes = {
+                                      201 : "URL successfully added.",
+                                      400 : "Bad Request.",
+                                      403 : "Invalid username or password.",
+                                      500 : "Service error. Try again later."
+                                }
+
+        self.auth_status_codes = {
+                                      200 : "OK.",
+                                      403 : "Invalid username or password.",
+                                      500 : "Service error. Try again later."
+                                 }
+
     def add_item(self, url, title=""):
         """ Method to add a new item to a instapaper account
             Returns 0 on success and -1 if something went wrong
