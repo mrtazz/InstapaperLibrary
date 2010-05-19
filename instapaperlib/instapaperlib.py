@@ -67,11 +67,3 @@ class Instapaper:
         except IOError, e:
             status = e.code
             return (status, self.add_status_codes[status])
-
-    def set_username(self, user):
-        """ set username"""
-        self.user = user
-
-    def set_password(self, password):
-        """ set password """
-        self.password = password
