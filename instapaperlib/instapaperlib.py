@@ -1,6 +1,7 @@
-##
-# @file instapaper.py
-# @brief simple library to use instapaper
+# encoding: utf-8
+'''
+ instapaperlib.py -- brief simple library to use instapaper
+'''
 
 import urllib
 import urllib2
@@ -42,8 +43,8 @@ class Instapaper:
             response = urllib2.urlopen(request).read()
             status = int(response)
             return (status, self.add_status_codes[status])
-        except IOError, e:
-            status = e.code
+        except IOError, exception:
+            status = exception.code
             return (status, self.add_status_codes[status])
 
     def auth(self, user=None, password=None):
@@ -64,6 +65,6 @@ class Instapaper:
             response = urllib2.urlopen(request).read()
             status = int(response)
             return (status, self.auth_status_codes[status])
-        except IOError, e:
-            status = e.code
+        except IOError, exception:
+            status = exception.code
             return (status, self.add_status_codes[status])
