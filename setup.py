@@ -26,6 +26,7 @@ setup(name = "instapaperlib",
       author_email = "d@unwiredcouch.com",
       url = "http://github.com/mrtazz/InstapaperLibrary",
       packages = ["instapaperlib"],
+      scripts=["bin/instapaper.py"],
       license = "MIT",
       classifiers = (
                 "Development Status :: 4 - Beta",
