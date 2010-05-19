@@ -45,6 +45,26 @@ class Instapaper:
         except IOError:
             return (-1, "Connection failed.")
 
+    def auth(self, user=None, password=None):
+        """ authenticate with the instapaper.com service
+
+            Parameters: user -> username
+                        password -> password
+            Returns: (status as int, status error message)
+        """
+        if not user:
+            user = self.user
+        if not password:
+            password = self.password
+        parameters = {'username' : self.user, 'password' : self.password}
+        headerdata = urllib.urlencode(parameters)
+        try:
+            request = urllib2.Request(self.authurl, headerdata)
+            response = urllib2.urlopen(request).read()
+            status = int(response)
+            return (status, self.auth_status_codes[status])
+        except IOError:
+            return (-1, "Connection failed.")
 
     def set_username(self, user):
         """ set username"""
