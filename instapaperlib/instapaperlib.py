@@ -42,8 +42,9 @@ class Instapaper:
             response = urllib2.urlopen(request).read()
             status = int(response)
             return (status, self.add_status_codes[status])
-        except IOError:
-            return (-1, "Connection failed.")
+        except IOError, e:
+            status = e.code
+            return (status, self.add_status_codes[status])
 
     def auth(self, user=None, password=None):
         """ authenticate with the instapaper.com service
@@ -63,8 +64,9 @@ class Instapaper:
             response = urllib2.urlopen(request).read()
             status = int(response)
             return (status, self.auth_status_codes[status])
-        except IOError:
-            return (-1, "Connection failed.")
+        except IOError, e:
+            status = e.code
+            return (status, self.add_status_codes[status])
 
     def set_username(self, user):
         """ set username"""
