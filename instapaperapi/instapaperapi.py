@@ -29,7 +29,10 @@ class Instapaper:
 
     def add_item(self, url, title=""):
         """ Method to add a new item to a instapaper account
-            Returns 0 on success and -1 if something went wrong
+
+            Parameters: url -> URL to add
+                        title -> optional title for the URL
+            Returns: (status as int, status error message)
         """
         parameters = {'username' : self.user,'password' : self.password,
                       'url' : url, 'title' : title}
@@ -37,12 +40,11 @@ class Instapaper:
         try:
             request = urllib2.Request(self.addurl, headerdata)
             response = urllib2.urlopen(request).read()
-            if (int(response) == 201):
-                return 0
-            else:
-                return -1
+            status = int(response)
+            return (status, self.add_status_codes[status])
         except IOError:
-            return -1
+            return (-1, "Connection failed.")
+
 
     def set_username(self, user):
         """ set username"""
