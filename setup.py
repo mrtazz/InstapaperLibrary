@@ -20,8 +20,7 @@ if sys.argv[-1] == "publish":
 setup(name = "instapaperlib",
       version = instapaperlib.__version__,
       description = "Python library for the instapaper.com API",
-      long_description = (open("README.rst").read() + "\n\n"
-                          + open("HISTORY.rst").read()),
+      long_description = (open("README.rst").read() + "\n\n" + open("HISTORY.rst").read()),
       author = "Daniel Schauenberg",
       author_email = "d@unwiredcouch.com",
       url = "http://github.com/mrtazz/InstapaperLibrary",

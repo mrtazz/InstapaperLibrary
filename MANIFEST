@@ -1,3 +1,5 @@
+HISTORY.rst
+README.rst
 setup.py
 bin/instapaper.py
 instapaperlib/__init__.py
