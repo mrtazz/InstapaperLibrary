@@ -11,6 +11,7 @@ Usage:
 Use the library directly:
 
 ::
+
     import instapaperlib
 
     instapaperlib.auth("username", "password")
@@ -19,6 +20,7 @@ Use the library directly:
 Create an instance to work with:
 
 ::
+
     from instapaperlib import Instapaper
 
     i = Instapaper("username", "password")
@@ -27,6 +29,7 @@ Create an instance to work with:
 Catch the return codes to work with:
 
 ::
+
     from instapaperlib import Instapaper
 
     i = Instapaper("username", "password")
