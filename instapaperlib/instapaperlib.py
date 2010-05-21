@@ -37,15 +37,8 @@ class Instapaper:
         """
         parameters = {'username' : self.user,'password' : self.password,
                       'url' : url, 'title' : title}
-        headerdata = urllib.urlencode(parameters)
-        try:
-            request = urllib2.Request(self.addurl, headerdata)
-            response = urllib2.urlopen(request).read()
-            status = int(response)
-            return (status, self.add_status_codes[status])
-        except IOError, exception:
-            status = exception.code
-            return (status, self.add_status_codes[status])
+        status = self.query(self.addurl, parameters)
+        return (status, self.add_status_codes[status])
 
     def auth(self, user=None, password=None):
         """ authenticate with the instapaper.com service
@@ -59,12 +52,23 @@ class Instapaper:
         if not password:
             password = self.password
         parameters = {'username' : self.user, 'password' : self.password}
-        headerdata = urllib.urlencode(parameters)
-        try:
-            request = urllib2.Request(self.authurl, headerdata)
-            response = urllib2.urlopen(request).read()
-            status = int(response)
-            return (status, self.auth_status_codes[status])
-        except IOError, exception:
-            status = exception.code
-            return (status, self.add_status_codes[status])
+        status = self.query(self.authurl, parameters)
+        return (status, self.auth_status_codes[status])
+
+    def query(self, url, params):
+      """ method to query a URL with the given parameters
+
+          Parameters:
+              url -> URL to query
+              params -> dictionary with parameter values
+
+          Returns: HTTP response code
+      """
+      headerdata = urllib.urlencode(params)
+      try:
+          request = urllib2.Request(url, headerdata)
+          response = urllib2.urlopen(request).read()
+          return int(response)
+      except IOError, exception:
+          return exception.code
+
