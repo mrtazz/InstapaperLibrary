@@ -37,7 +37,7 @@ class Instapaper:
         """
         parameters = {'username' : self.user,'password' : self.password,
                       'url' : url, 'title' : title}
-        status = self.query(self.addurl, parameters)
+        status = self._query(self.addurl, parameters)
         return (status, self.add_status_codes[status])
 
     def auth(self, user=None, password=None):
@@ -52,10 +52,10 @@ class Instapaper:
         if not password:
             password = self.password
         parameters = {'username' : self.user, 'password' : self.password}
-        status = self.query(self.authurl, parameters)
+        status = self._query(self.authurl, parameters)
         return (status, self.auth_status_codes[status])
 
-    def query(self, url, params):
+    def _query(self, url, params):
       """ method to query a URL with the given parameters
 
           Parameters:
