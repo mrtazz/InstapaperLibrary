@@ -56,19 +56,19 @@ class Instapaper:
         return (status, self.auth_status_codes[status])
 
     def _query(self, url, params):
-      """ method to query a URL with the given parameters
+        """ method to query a URL with the given parameters
 
-          Parameters:
-              url -> URL to query
-              params -> dictionary with parameter values
+            Parameters:
+                url -> URL to query
+                params -> dictionary with parameter values
 
-          Returns: HTTP response code
-      """
-      headerdata = urllib.urlencode(params)
-      try:
-          request = urllib2.Request(url, headerdata)
-          response = urllib2.urlopen(request).read()
-          return int(response)
-      except IOError, exception:
-          return exception.code
+            Returns: HTTP response code
+        """
+        headerdata = urllib.urlencode(params)
+        try:
+            request = urllib2.Request(url, headerdata)
+            response = urllib2.urlopen(request).read()
+            return int(response)
+        except IOError, exception:
+            return exception.code
 
