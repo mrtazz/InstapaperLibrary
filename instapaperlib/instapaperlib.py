@@ -67,8 +67,10 @@ class Instapaper:
         headerdata = urllib.urlencode(params)
         try:
             request = urllib2.Request(url, headerdata)
-            response = urllib2.urlopen(request).read()
-            return int(response)
+            response = urllib2.urlopen(request)
+            status = response.read()
+            info = response.info()
+            return int(status)
         except IOError, exception:
             return exception.code
 
