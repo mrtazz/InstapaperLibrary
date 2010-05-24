@@ -16,6 +16,8 @@ Use the library directly:
 
     instapaperlib.auth("username", "password")
     instapaperlib.add_item("username", "password", "URL", "title")
+    # with selection test set
+    instapaperlib.add_item("username", "password", "URL", "title", "selection")
 
 Create an instance to work with:
 
@@ -34,6 +36,15 @@ Catch the return codes to work with:
 
     i = Instapaper("username", "password")
     (statuscode, statusmessage) = i.add_item("URL", "title")
+
+Also catch the response header:
+
+::
+
+    from instapaperlib import Instapaper
+
+    i = Instapaper("username", "password")
+    (statuscode, statusmessage, title, location) = i.add_item("URL", "title", response_info=True)
 
 Or use the cli client:
 
