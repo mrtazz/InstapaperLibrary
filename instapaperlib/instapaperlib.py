@@ -9,11 +9,15 @@ import urllib2
 class Instapaper:
     """ This class provides the structure for the connection object """
 
-    def __init__(self, user, password):
+    def __init__(self, user, password, https=True):
         self.user = user
         self.password = password
-        self.authurl = "https://www.instapaper.com/api/authenticate"
-        self.addurl = "https://www.instapaper.com/api/add"
+        if https:
+            self.authurl = "https://www.instapaper.com/api/authenticate"
+            self.addurl = "https://www.instapaper.com/api/add"
+        else:
+            self.authurl = "http://www.instapaper.com/api/authenticate"
+            self.addurl = "http://www.instapaper.com/api/add"
 
         self.add_status_codes = {
                                       201 : "URL successfully added.",
