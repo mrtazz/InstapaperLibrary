@@ -28,7 +28,7 @@ class Instapaper:
                                       500 : "Service error. Try again later."
                                  }
 
-    def add_item(self, url, title=None, response_info=False):
+    def add_item(self, url, title=None, selection=None, response_info=False):
         """ Method to add a new item to a instapaper account
 
             Parameters: url -> URL to add
@@ -40,13 +40,19 @@ class Instapaper:
                       'password' : self.password,
                       'url' : url,
                      }
+        # look for optional parameters title and selection
         if title is not None:
             parameters['title'] = title
         else:
             parameters['auto-title'] = 1
+        if selection is not None:
+            parameters['selection'] = selection
+
+        # make query with the chosen parameters
         status, headers = self._query(self.addurl, parameters)
         statustxt = self.add_status_codes[status]
-        if info:
+        # if response headers are desired, return them also
+        if response_info:
             return (status, statustxt, headers['title'], headers['location'])
         else:
             return (status, statustxt)
