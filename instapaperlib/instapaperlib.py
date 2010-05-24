@@ -28,7 +28,7 @@ class Instapaper:
                                       500 : "Service error. Try again later."
                                  }
 
-    def add_item(self, url, title=""):
+    def add_item(self, url, title=None, response_info=False):
         """ Method to add a new item to a instapaper account
 
             Parameters: url -> URL to add
@@ -39,10 +39,17 @@ class Instapaper:
                       'username' : self.user,
                       'password' : self.password,
                       'url' : url,
-                      'title' : title
                      }
+        if title is not None:
+            parameters['title'] = title
+        else:
+            parameters['auto-title'] = 1
         status, headers = self._query(self.addurl, parameters)
-        return (status, self.add_status_codes[status])
+        statustxt = self.add_status_codes[status]
+        if info:
+            return (status, statustxt, headers['title'], headers['location'])
+        else:
+            return (status, statustxt)
 
     def auth(self, user=None, password=None):
         """ authenticate with the instapaper.com service
