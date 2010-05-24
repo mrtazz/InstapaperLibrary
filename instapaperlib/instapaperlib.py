@@ -35,9 +35,13 @@ class Instapaper:
                         title -> optional title for the URL
             Returns: (status as int, status error message)
         """
-        parameters = {'username' : self.user,'password' : self.password,
-                      'url' : url, 'title' : title}
-        status = self._query(self.addurl, parameters)
+        parameters = {
+                      'username' : self.user,
+                      'password' : self.password,
+                      'url' : url,
+                      'title' : title
+                     }
+        status, headers = self._query(self.addurl, parameters)
         return (status, self.add_status_codes[status])
 
     def auth(self, user=None, password=None):
@@ -51,8 +55,11 @@ class Instapaper:
             user = self.user
         if not password:
             password = self.password
-        parameters = {'username' : self.user, 'password' : self.password}
-        status = self._query(self.authurl, parameters)
+        parameters = {
+                      'username' : self.user,
+                      'password' : self.password
+                     }
+        status, headers = self._query(self.authurl, parameters)
         return (status, self.auth_status_codes[status])
 
     def _query(self, url, params):
@@ -62,15 +69,20 @@ class Instapaper:
                 url -> URL to query
                 params -> dictionary with parameter values
 
-            Returns: HTTP response code
+            Returns: HTTP response code, headers
+                     If an exception occurred, headers fields are None
         """
+        # return values
+        headers = {'location': None, 'title': None}
         headerdata = urllib.urlencode(params)
         try:
             request = urllib2.Request(url, headerdata)
             response = urllib2.urlopen(request)
             status = response.read()
             info = response.info()
-            return int(status)
+            headers['location'] = info['Content-Location']
+            headers['title'] = info['X-Instapaper-Title']
+            return (int(status), headers)
         except IOError, exception:
-            return exception.code
+            return (exception.code, headers)
 
