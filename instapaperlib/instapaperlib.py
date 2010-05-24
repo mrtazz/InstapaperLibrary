@@ -79,7 +79,7 @@ class Instapaper:
         status, headers = self._query(self.authurl, parameters)
         return (status, self.auth_status_codes[status])
 
-    def _query(self, url, params):
+    def _query(self, url=None, params=""):
         """ method to query a URL with the given parameters
 
             Parameters:
@@ -89,6 +89,8 @@ class Instapaper:
             Returns: HTTP response code, headers
                      If an exception occurred, headers fields are None
         """
+        if url is None:
+            raise NoUrlError("No URL was provided.")
         # return values
         headers = {'location': None, 'title': None}
         headerdata = urllib.urlencode(params)
@@ -102,4 +104,14 @@ class Instapaper:
             return (int(status), headers)
         except IOError, exception:
             return (exception.code, headers)
+
+# instapaper specific exceptions
+class NoUrlError(Exception):
+    """ exception to raise if no URL is given.
+    """
+    def __init__(self, arg):
+        self.arg = arg
+    def __str__(self):
+        return repr(self.arg)
+
 
