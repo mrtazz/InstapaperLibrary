@@ -16,7 +16,7 @@ Use the library directly:
 
     instapaperlib.auth("username", "password")
     instapaperlib.add_item("username", "password", "URL", "title")
-    # with selection test set
+    # with selection text set
     instapaperlib.add_item("username", "password", "URL", "title", "selection")
 
 Create an instance to work with:
@@ -63,6 +63,3 @@ Or, if you must:
 
   easy_install instapaperlib
 
-Coming next
-------------
-* Parse and return response header
