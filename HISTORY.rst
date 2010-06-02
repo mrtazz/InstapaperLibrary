@@ -15,6 +15,6 @@ History
 * Add CLI client
 
 0.1.0 (2010-05-01)
-------
+------------------
 * Basic library working
 * Working add_item
