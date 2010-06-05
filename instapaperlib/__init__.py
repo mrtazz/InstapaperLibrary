@@ -3,7 +3,7 @@
 from instapaperlib import Instapaper
 
 __author__ = "Daniel Schauenberg"
-__version__ = "0.3.0"
+__version__ = "0.3.1"
 __license__ = "MIT"
 
 def auth(user='', password=''):
