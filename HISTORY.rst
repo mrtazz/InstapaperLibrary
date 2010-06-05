@@ -1,6 +1,11 @@
 History
 ========
 
+0.3.1 (2010-06-05)
+-------------------
+* add doctest unit test
+* catch exception in auth because of new query method
+
 0.3.0 (2010-05-24)
 -------------------
 * Choose between HTTP/HTTPS (HTTPS standard)
