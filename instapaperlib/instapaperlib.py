@@ -1,6 +1,28 @@
 # encoding: utf-8
 '''
  instapaperlib.py -- brief simple library to use instapaper
+
+>>> Instapaper("instapaperlib", "").auth()
+(200, 'OK.')
+
+>>> Instapaper("instapaperlib", "dd").auth()
+(200, 'OK.')
+
+>>> Instapaper("instapaperlibi", "").auth()
+(403, 'Invalid username or password.')
+
+>>> Instapaper("instapaperlib", "").add_item("google.com")
+(201, 'URL successfully added.')
+
+>>> Instapaper("instapaperlib", "").add_item("google.com", "google")
+(201, 'URL successfully added.')
+
+>>> Instapaper("instapaperlib", "").add_item("google.com", "google", response_info=True)
+(201, 'URL successfully added.', '"google"', 'http://www.google.com/')
+
+>>> Instapaper("instapaperlib", "").add_item("google.com", "google", selection="google page", response_info=True)
+(201, 'URL successfully added.', '"google"', 'http://www.google.com/')
+
 '''
 
 import urllib
@@ -121,3 +143,7 @@ class NoUrlError(Exception):
         return repr(self.arg)
 
 
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()
