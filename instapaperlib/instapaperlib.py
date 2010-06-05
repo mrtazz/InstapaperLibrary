@@ -99,8 +99,14 @@ class Instapaper:
             response = urllib2.urlopen(request)
             status = response.read()
             info = response.info()
-            headers['location'] = info['Content-Location']
-            headers['title'] = info['X-Instapaper-Title']
+            try:
+                headers['location'] = info['Content-Location']
+            except KeyError:
+                pass
+            try:
+                headers['title'] = info['X-Instapaper-Title']
+            except KeyError:
+                pass
             return (int(status), headers)
         except IOError, exception:
             return (exception.code, headers)
