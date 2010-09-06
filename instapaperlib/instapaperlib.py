@@ -72,7 +72,8 @@ class Instapaper:
                                       500 : "Service error. Try again later."
                                  }
 
-    def add_item(self, url, title=None, selection=None, response_info=False):
+    def add_item(self, url, title=None, selection=None,
+                 jsonp=None, redirect=None, response_info=False):
         """ Method to add a new item to a instapaper account
 
             Parameters: url -> URL to add
@@ -91,17 +92,24 @@ class Instapaper:
             parameters['auto-title'] = 1
         if selection is not None:
             parameters['selection'] = selection
+        if redirect is not None:
+            parameters['redirect'] = redirect
+        if jsonp is not None:
+            parameters['jsonp'] = jsonp
 
         # make query with the chosen parameters
         status, headers = self._query(self.addurl, parameters)
-        statustxt = self.add_status_codes[status]
+        # return the callback call if we want jsonp
+        if jsonp is not None:
+            return status
+        statustxt = self.add_status_codes[int(status)]
         # if response headers are desired, return them also
         if response_info:
-            return (status, statustxt, headers['title'], headers['location'])
+            return (int(status), statustxt, headers['title'], headers['location'])
         else:
-            return (status, statustxt)
+            return (int(status), statustxt)
 
-    def auth(self, user=None, password=None):
+    def auth(self, user=None, password=None, jsonp=None):
         """ authenticate with the instapaper.com service
 
             Parameters: user -> username
@@ -116,8 +124,13 @@ class Instapaper:
                       'username' : self.user,
                       'password' : self.password
                      }
+        if jsonp is not None:
+            parameters['jsonp'] = jsonp
         status, headers = self._query(self.authurl, parameters)
-        return (status, self.auth_status_codes[status])
+        # return the callback call if we want jsonp
+        if jsonp is not None:
+            return status
+        return (int(status), self.auth_status_codes[int(status)])
 
     def _query(self, url=None, params=""):
         """ method to query a URL with the given parameters
@@ -147,7 +160,7 @@ class Instapaper:
                 headers['title'] = info['X-Instapaper-Title']
             except KeyError:
                 pass
-            return (int(status), headers)
+            return (status, headers)
         except IOError, exception:
             return (exception.code, headers)
 
