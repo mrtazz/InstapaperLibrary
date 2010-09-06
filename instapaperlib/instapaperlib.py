@@ -23,6 +23,24 @@
 >>> Instapaper("instapaperlib", "").add_item("google.com", "google", selection="google page", response_info=True)
 (201, 'URL successfully added.', '"google"', 'http://www.google.com/')
 
+>>> Instapaper("instapaperlib", "").add_item("google.com", "google", selection="google page", jsonp="callBack", response_info=True)
+'callBack({"status":201,"url":"http:\\\\/\\\\/www.google.com\\\\/"});'
+
+>>> Instapaper("instapaperlib", "").add_item("google.com", jsonp="callBack")
+'callBack({"status":201,"url":"http:\\\\/\\\\/www.google.com\\\\/"});'
+
+>>> Instapaper("instapaperlib", "").auth(jsonp="callBack")
+'callBack({"status":200});'
+
+>>> Instapaper("instapaperlib", "dd").auth(jsonp="callBack")
+'callBack({"status":200});'
+
+>>> Instapaper("instapaperlibi", "").auth(jsonp="callBack")
+'callBack({"status":403});'
+
+>>> Instapaper("instapaperlib", "").add_item("google.com", "google", redirect="close")
+(201, 'URL successfully added.')
+
 '''
 
 import urllib
