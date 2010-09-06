@@ -58,3 +58,7 @@ Or, if you must::
     easy_install instapaperlib
 
 
+Meta
+-----
+Project: http://github.com/mrtazz/InstapaperLibrary
+Issues: http://github.com/mrtazz/InstapaperLibrary/issues
