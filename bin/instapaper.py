@@ -4,8 +4,6 @@
     instapaper.com cli client
 """
 
-import urllib
-import urllib2
 import re
 import sys
 import os
