@@ -60,5 +60,6 @@ Or, if you must::
 
 Meta
 -----
-Project: http://github.com/mrtazz/InstapaperLibrary
-Issues: http://github.com/mrtazz/InstapaperLibrary/issues
+:Project: http://github.com/mrtazz/InstapaperLibrary
+
+:Issues: http://github.com/mrtazz/InstapaperLibrary/issues
