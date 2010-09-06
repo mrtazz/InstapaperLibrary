@@ -1,6 +1,11 @@
 History
 ========
 
+0.4.0 (2010-09-06)
+------------------
+* add support for JSONP
+* add support for redirect=close
+
 0.3.1 (2010-06-05)
 -------------------
 * add doctest unit test
