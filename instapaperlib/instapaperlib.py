@@ -161,7 +161,7 @@ class Instapaper:
             except KeyError:
                 pass
             return (status, headers)
-        except IOError, exception:
+        except IOError as exception:
             return (exception.code, headers)
 
 # instapaper specific exceptions
