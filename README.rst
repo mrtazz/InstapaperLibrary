@@ -56,10 +56,18 @@ Install via pip::
 Or, if you must::
 
     easy_install instapaperlib
-
+    
+Contributing
+-------------
+- fork the repo
+- add your changes and tests so I don't accidentally break anything in the future
+- run the tests: :code:`python instapaperlib/instapaperlib.py`
+- open a pull request (also runs the tests via Travis CI)
+- high-five yourself, you're awesome
 
 Meta
 -----
 :Project: http://github.com/mrtazz/InstapaperLibrary
 
 :Issues: http://github.com/mrtazz/InstapaperLibrary/issues
+
