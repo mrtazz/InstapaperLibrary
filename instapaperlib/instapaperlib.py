@@ -150,7 +150,10 @@ class Instapaper:
         try:
             request = urllib2.Request(url, headerdata)
             response = urllib2.urlopen(request)
-            status = response.read()
+            if 'jsonp' in params:
+                status = response.read()
+            else:
+                status = response.getcode()
             info = response.info()
             try:
                 headers['location'] = info['Content-Location']
