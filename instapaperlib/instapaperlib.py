@@ -150,11 +150,13 @@ class Instapaper:
         try:
             request = urllib2.Request(url, headerdata)
             response = urllib2.urlopen(request)
+            # return numeric HTTP status code unless JSONP was requested
             if 'jsonp' in params:
                 status = response.read()
             else:
                 status = response.getcode()
             info = response.info()
+
             try:
                 headers['location'] = info['Content-Location']
             except KeyError:
@@ -167,7 +169,7 @@ class Instapaper:
         except urllib2.HTTPError as exception:
             # handle API not returning JSONP response on 403
             if 'jsonp' in params:
-                return ('%s({"status":%d})' % (params['jsonp'], exception.getcode()), headers)
+                return ('%s({"status":%d})' % (params['jsonp'], exception.code), headers)
             else:
                 return (exception.code, headers)
         except IOError as exception:
