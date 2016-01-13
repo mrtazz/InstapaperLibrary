@@ -18,25 +18,25 @@
 (201, 'URL successfully added.')
 
 >>> Instapaper("instapaperlib", "").add_item("google.com", "google", response_info=True)
-(201, 'URL successfully added.', '"google"', 'http://www.google.com/')
+(201, 'URL successfully added.', 'google', 'http://www.google.com/')
 
 >>> Instapaper("instapaperlib", "").add_item("google.com", "google", selection="google page", response_info=True)
-(201, 'URL successfully added.', '"google"', 'http://www.google.com/')
+(201, 'URL successfully added.', 'google', 'http://www.google.com/')
 
 >>> Instapaper("instapaperlib", "").add_item("google.com", "google", selection="google page", jsonp="callBack", response_info=True)
-'callBack({"status":201,"url":"http:\\\\/\\\\/www.google.com\\\\/"});'
+'callBack({"status":201,"text":"{\\\\"bookmark_id\\\\": 45744013}"})'
 
 >>> Instapaper("instapaperlib", "").add_item("google.com", jsonp="callBack")
-'callBack({"status":201,"url":"http:\\\\/\\\\/www.google.com\\\\/"});'
+'callBack({"status":201,"text":"{\\\\"bookmark_id\\\\": 45744013}"})'
 
 >>> Instapaper("instapaperlib", "").auth(jsonp="callBack")
-'callBack({"status":200});'
+'callBack({"status":200})'
 
 >>> Instapaper("instapaperlib", "dd").auth(jsonp="callBack")
-'callBack({"status":200});'
+'callBack({"status":200})'
 
 >>> Instapaper("instapaperlibi", "").auth(jsonp="callBack")
-'callBack({"status":403});'
+'callBack({"status":403})'
 
 >>> Instapaper("instapaperlib", "").add_item("google.com", "google", redirect="close")
 (201, 'URL successfully added.')
@@ -164,6 +164,12 @@ class Instapaper:
             except KeyError:
                 pass
             return (status, headers)
+        except urllib2.HTTPError as exception:
+            # handle API not returning JSONP response on 403
+            if 'jsonp' in params:
+                return ('%s({"status":%d})' % (params['jsonp'], exception.getcode()), headers)
+            else:
+                return (exception.code, headers)
         except IOError as exception:
             return (exception.code, headers)
 
