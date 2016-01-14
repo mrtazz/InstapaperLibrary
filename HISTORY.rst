@@ -1,6 +1,10 @@
 History
 ========
 
+0.5.0 (2016-01-13)
+------------------
+* add support for new instapaper API
+
 0.4.0 (2010-09-06)
 ------------------
 * add support for JSONP
