@@ -2,9 +2,13 @@
 instapaperlib.py
 =================
 
-Python library for the instapaper.com API.
+.. image:: https://travis-ci.org/mrtazz/InstapaperLibrary.svg?branch=master
+    :target: https://travis-ci.org/mrtazz/InstapaperLibrary
+    
+Overview
+---------
 
-http://instapaper.com
+Python library for the instapaper.com API. http://instapaper.com
 
 Usage
 ------
