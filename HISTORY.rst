@@ -1,6 +1,10 @@
 History
 ========
 
+0.5.1 (2016-01-13)
+------------------
+* fix travis.yml misconfig that only ran tests on master branch
+
 0.5.0 (2016-01-13)
 ------------------
 * add support for new instapaper API
